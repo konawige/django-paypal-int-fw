@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+    <form action="." method="POST" style="margin-top: 50px;">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="row d-flex flex-row justify-content-between row-donate-form">
+                <div class="col-sm-5">
+                    <p class="donate-form-label">{{ form.name.label }}</p>
+                    {{ form.name }}
+                </div>
+                <div class="col-sm-5">
+                    <p class="donate-form-label">{{ form.email.label }}</p>
+                    {{ form.email }}
+                </div>
+            </div>
+            <div class="row d-flex flex-row justify-content-between row-donate-form" style="margin-top: 10px;">
+                <div class="col-sm-5">
+                    <p class="donate-form-label">{{ form.amount.label }}</p>
+                    {{ form.amount }}
+                </div>
+                <div class="col-sm-5" style="margin-top: 50px;">
+                    <input class="btn-lg donate-form-submit" type="submit" value="Payer avec Paypal">
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+    {% if form.errors %}
+        <div class="form-errors" style="color: red">
+            <ul>
+                {% for field, errors in form.errors.items %}
+                    <li>{{ field }}: {{ errors|join:", " }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock page_content %}
+
